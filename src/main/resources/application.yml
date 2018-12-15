@@ -1,0 +1,39 @@
+server:
+  port: 8087
+
+spring:
+  profiles:
+    active: dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/yhhbsz?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+    username: root
+    password:
+  redis:
+    host: localhost
+    port: 6379
+
+mybatis:
+  mapper-locations: classpath:mybatis/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+# 打印sql
+logging:
+  level:
+     com.example.demo.dao : debug
+
+---
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/test
+    username: root
+    password:
+
+---
+spring:
+  profiles: test
+  datasource:
+    url: jdbc:mysql://39.106.31.166:3306/test
+    username: root
+    password: liuchaoyang

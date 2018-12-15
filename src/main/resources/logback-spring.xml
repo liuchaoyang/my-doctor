@@ -1,0 +1,42 @@
+<configuration>
+
+    <!--<property name="logDir" value="/data1/logs/my-doctor"/>-->
+    <property name="logDir" value="a"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder> 3 <pattern>
+            %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+        </pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logDir}/my-doctor.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>my-doctor.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <MaxHistory>90</MaxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <springProfile name="dev">
+        <root level="DEBUG">
+            <appender-ref ref="STDOUT"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="test">
+        <root level="INFO">
+            <appender-ref ref="FILE"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="prod">
+        <root level="INFO">
+            <appender-ref ref="FILE"/>
+        </root>
+    </springProfile>
+
+</configuration>

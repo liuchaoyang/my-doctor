@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.doctor.mapper.OrgMapper" >
+  <resultMap id="BaseResultMap" type="com.doctor.model.Org" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="VARCHAR" />
+    <result column="full_id" property="fullId" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="INTEGER" />
+    <result column="orgName" property="orgname" jdbcType="VARCHAR" />
+    <result column="mnemonic_code" property="mnemonicCode" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="contact_person" property="contactPerson" jdbcType="VARCHAR" />
+    <result column="logo_id" property="logoId" jdbcType="VARCHAR" />
+    <result column="show_text" property="showText" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, parent_id, full_id, level, orgName, mnemonic_code, address, phone, contact_person, 
+    logo_id, show_text, create_by, create_time, update_by, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_org
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sys_org
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.doctor.model.Org" >
+    insert into sys_org (id, parent_id, full_id, 
+      level, orgName, mnemonic_code, 
+      address, phone, contact_person, 
+      logo_id, show_text, create_by, 
+      create_time, update_by, update_time
+      )
+    values (#{id,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{fullId,jdbcType=VARCHAR}, 
+      #{level,jdbcType=INTEGER}, #{orgname,jdbcType=VARCHAR}, #{mnemonicCode,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{contactPerson,jdbcType=VARCHAR}, 
+      #{logoId,jdbcType=VARCHAR}, #{showText,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.doctor.model.Org" >
+    insert into sys_org
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="fullId != null" >
+        full_id,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="orgname != null" >
+        orgName,
+      </if>
+      <if test="mnemonicCode != null" >
+        mnemonic_code,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="contactPerson != null" >
+        contact_person,
+      </if>
+      <if test="logoId != null" >
+        logo_id,
+      </if>
+      <if test="showText != null" >
+        show_text,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="fullId != null" >
+        #{fullId,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="orgname != null" >
+        #{orgname,jdbcType=VARCHAR},
+      </if>
+      <if test="mnemonicCode != null" >
+        #{mnemonicCode,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPerson != null" >
+        #{contactPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="logoId != null" >
+        #{logoId,jdbcType=VARCHAR},
+      </if>
+      <if test="showText != null" >
+        #{showText,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.doctor.model.Org" >
+    update sys_org
+    <set >
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="fullId != null" >
+        full_id = #{fullId,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="orgname != null" >
+        orgName = #{orgname,jdbcType=VARCHAR},
+      </if>
+      <if test="mnemonicCode != null" >
+        mnemonic_code = #{mnemonicCode,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPerson != null" >
+        contact_person = #{contactPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="logoId != null" >
+        logo_id = #{logoId,jdbcType=VARCHAR},
+      </if>
+      <if test="showText != null" >
+        show_text = #{showText,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.doctor.model.Org" >
+    update sys_org
+    set parent_id = #{parentId,jdbcType=VARCHAR},
+      full_id = #{fullId,jdbcType=VARCHAR},
+      level = #{level,jdbcType=INTEGER},
+      orgName = #{orgname,jdbcType=VARCHAR},
+      mnemonic_code = #{mnemonicCode,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      contact_person = #{contactPerson,jdbcType=VARCHAR},
+      logo_id = #{logoId,jdbcType=VARCHAR},
+      show_text = #{showText,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.doctor.mapper.UserDoctorChatMapper" >
+  <resultMap id="BaseResultMap" type="com.doctor.model.UserDoctorChat" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="send_id" property="sendId" jdbcType="VARCHAR" />
+    <result column="message" property="message" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.doctor.model.UserDoctorChat" extends="BaseResultMap" >
+    <result column="doctor_id" property="doctorId" jdbcType="VARBINARY" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, send_id, message
+  </sql>
+  <sql id="Blob_Column_List" >
+    doctor_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_user_doctor_chat
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_user_doctor_chat
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.doctor.model.UserDoctorChat" >
+    insert into tb_user_doctor_chat (id, user_id, send_id, 
+      message, doctor_id)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{sendId,jdbcType=VARCHAR}, 
+      #{message,jdbcType=VARCHAR}, #{doctorId,jdbcType=VARBINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="com.doctor.model.UserDoctorChat" >
+    insert into tb_user_doctor_chat
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="sendId != null" >
+        send_id,
+      </if>
+      <if test="message != null" >
+        message,
+      </if>
+      <if test="doctorId != null" >
+        doctor_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="sendId != null" >
+        #{sendId,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null" >
+        #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorId != null" >
+        #{doctorId,jdbcType=VARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.doctor.model.UserDoctorChat" >
+    update tb_user_doctor_chat
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="sendId != null" >
+        send_id = #{sendId,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null" >
+        message = #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorId != null" >
+        doctor_id = #{doctorId,jdbcType=VARBINARY},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.doctor.model.UserDoctorChat" >
+    update tb_user_doctor_chat
+    set user_id = #{userId,jdbcType=VARCHAR},
+      send_id = #{sendId,jdbcType=VARCHAR},
+      message = #{message,jdbcType=VARCHAR},
+      doctor_id = #{doctorId,jdbcType=VARBINARY}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.doctor.model.UserDoctorChat" >
+    update tb_user_doctor_chat
+    set user_id = #{userId,jdbcType=VARCHAR},
+      send_id = #{sendId,jdbcType=VARCHAR},
+      message = #{message,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
