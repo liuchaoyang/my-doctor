@@ -22,6 +22,15 @@
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="state" property="state" jdbcType="INTEGER" />
   </resultMap>
+  <resultMap id="doctorVO" type="com.doctor.model.DoctorVO" >
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="name_" property="name" jdbcType="VARCHAR" />
+    <result column="profession_title" property="professionTitle" jdbcType="VARCHAR" />
+    <result column="orgName" property="orgName" jdbcType="VARCHAR" />
+    <result column="dept_name" property="deptName" jdbcType="VARCHAR" />
+    <result column="skill_info" property="skillInfo" jdbcType="VARCHAR" />
+    <result column="describe_" property="describe" jdbcType="VARCHAR" />
+  </resultMap>
   <sql id="Base_Column_List" >
     user_id, sex, birthday, address, degree, profession_title, dept_id, dept_name, skill_info, 
     yprice, price, speciality, type, describe_, create_by, create_time, update_by, update_time, 
@@ -32,6 +41,14 @@
     <include refid="Base_Column_List" />
     from sys_doctor
     where user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="listByOrgId" resultMap="doctorVO">
+    SELECT u.id as user_id, u.name_, d.profession_title, o.orgName, d.dept_name, d.skill_info, d.describe_
+    FROM sys_org o
+    LEFT JOIN sys_user u on o.id = u.org_id
+    LEFT JOIN sys_doctor d on d.user_id = u.id
+    WHERE o.id = #{orgId}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from sys_doctor

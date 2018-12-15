@@ -3,6 +3,8 @@ package com.doctor.web;
 import com.doctor.common.ResultJson;
 import com.doctor.exception.APIBaseException;
 import com.google.gson.Gson;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -11,9 +13,11 @@ import java.io.IOException;
 
 @ControllerAdvice
 public class APIExceptionHandler {
+    private static final Logger logger = LoggerFactory.getLogger(APIExceptionHandler.class);
 
     @ExceptionHandler(value = Exception.class)
     public void handle(Exception ex, HttpServletResponse response) throws IOException {
+        logger.error("exception:", ex);
         ResultJson resultJson = new ResultJson();
         if (ex instanceof APIBaseException) {
             resultJson.setCode(((APIBaseException) ex).getCode());

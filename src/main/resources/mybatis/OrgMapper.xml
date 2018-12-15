@@ -28,6 +28,20 @@
     from sys_org
     where id = #{id,jdbcType=VARCHAR}
   </select>
+
+  <select id="listByParentId" resultMap="BaseResultMap">
+    SELECT id, parent_id, orgName, address, show_text
+    FROM sys_org
+    <where>
+      <if test="parentId != null">
+        AND parent_id = #{parentId}
+      </if>
+      <if test="parentId == null">
+        AND parent_id = ''
+      </if>
+    </where>
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from sys_org
     where id = #{id,jdbcType=VARCHAR}

@@ -1,6 +1,9 @@
 package com.doctor.mapper;
 
 import com.doctor.model.Org;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface OrgMapper {
     int deleteByPrimaryKey(String id);
@@ -14,4 +17,6 @@ public interface OrgMapper {
     int updateByPrimaryKeySelective(Org record);
 
     int updateByPrimaryKey(Org record);
+
+    List<Org> listByParentId(@Param("parentId") String parentId);
 }
