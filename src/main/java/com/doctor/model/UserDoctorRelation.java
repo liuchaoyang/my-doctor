@@ -5,7 +5,7 @@ public class UserDoctorRelation {
 
     private String userId;
 
-    private byte[] doctorId;
+    private String doctorId;
 
     public Integer getId() {
         return id;
@@ -23,11 +23,11 @@ public class UserDoctorRelation {
         this.userId = userId;
     }
 
-    public byte[] getDoctorId() {
+    public String getDoctorId() {
         return doctorId;
     }
 
-    public void setDoctorId(byte[] doctorId) {
+    public void setDoctorId(String doctorId) {
         this.doctorId = doctorId;
     }
 }

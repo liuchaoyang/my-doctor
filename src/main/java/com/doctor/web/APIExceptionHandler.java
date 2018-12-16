@@ -5,6 +5,7 @@ import com.doctor.exception.APIBaseException;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -22,9 +23,12 @@ public class APIExceptionHandler {
         if (ex instanceof APIBaseException) {
             resultJson.setCode(((APIBaseException) ex).getCode());
             resultJson.setMessage(ex.getMessage());
+        } else if(ex instanceof MissingServletRequestParameterException){
+            resultJson.setCode(400);
+            resultJson.setMessage("MissingServletRequestParameterException！");
         } else {
             resultJson.setCode(500);
-            resultJson.setMessage("位置异常");
+            resultJson.setMessage("服务器错误，请联系管理员！");
         }
         output(response, resultJson);
 

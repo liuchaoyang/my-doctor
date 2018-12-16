@@ -4,28 +4,25 @@
   <resultMap id="BaseResultMap" type="com.doctor.model.UserDoctorRelation" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="doctor_id" property="doctorId" jdbcType="VARCHAR" />
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.doctor.model.UserDoctorRelation" extends="BaseResultMap" >
-    <result column="doctor_id" property="doctorId" jdbcType="VARBINARY" />
-  </resultMap>
+
   <sql id="Base_Column_List" >
-    id, user_id
+    id, user_id, doctor_id
   </sql>
-  <sql id="Blob_Column_List" >
-    doctor_id
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from tb_user_doctor_relation
     where id = #{id,jdbcType=INTEGER}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from tb_user_doctor_relation
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" parameterType="com.doctor.model.UserDoctorRelation" >
     insert into tb_user_doctor_relation (id, user_id, doctor_id
       )
