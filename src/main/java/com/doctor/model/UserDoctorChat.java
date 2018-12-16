@@ -9,7 +9,7 @@ public class UserDoctorChat {
 
     private String message;
 
-    private byte[] doctorId;
+    private String doctorId;
 
     public Integer getId() {
         return id;
@@ -43,11 +43,11 @@ public class UserDoctorChat {
         this.message = message;
     }
 
-    public byte[] getDoctorId() {
+    public String getDoctorId() {
         return doctorId;
     }
 
-    public void setDoctorId(byte[] doctorId) {
+    public void setDoctorId(String doctorId) {
         this.doctorId = doctorId;
     }
 }

@@ -3,12 +3,10 @@ package com.doctor.service;
 import com.doctor.exception.APIBaseException;
 import com.doctor.exception.UserException;
 import com.doctor.mapper.DoctorMapper;
+import com.doctor.mapper.UserDoctorChatMapper;
 import com.doctor.mapper.UserDoctorRelationMapper;
 import com.doctor.mapper.UserMapper;
-import com.doctor.model.Doctor;
-import com.doctor.model.DoctorVO;
-import com.doctor.model.User;
-import com.doctor.model.UserDoctorRelation;
+import com.doctor.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +21,8 @@ public class DoctorService {
     private DoctorMapper doctorMapper;
     @Autowired
     private UserDoctorRelationMapper userDoctorRelationMapper;
+    @Autowired
+    private UserDoctorChatMapper chatMapper;
 
     public List<DoctorVO> listByOrgId(String orgId) {
         return doctorMapper.listByOrgId(orgId);
@@ -42,5 +42,24 @@ public class DoctorService {
         relation.setUserId(userId);
         relation.setDoctorId(doctorId);
         userDoctorRelationMapper.insert(relation);
+    }
+
+    public List<DoctorVO> listByUserID(String userId) {
+        return doctorMapper.listByUserId(userId);
+    }
+
+    public void chat(String userId, String doctorId, String sendId, String message) {
+        UserDoctorChat chat = new UserDoctorChat();
+        chat.setUserId(userId);
+        chat.setDoctorId(doctorId);
+        chat.setSendId(sendId);
+        chat.setMessage(message);
+        chatMapper.insert(chat);
+
+    }
+
+    public List<UserDoctorChat> chatList(String userId, String doctorId) {
+        return chatMapper.list(userId, doctorId);
+
     }
 }

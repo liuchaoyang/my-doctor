@@ -24,4 +24,24 @@ public class DoctorController {
         doctorService.bindDoctor(userId, doctorId);
         return ResultJson.success();
     }
+
+    @RequestMapping("/doctor/my_doctor")
+    public ResultJson listByUser(@RequestParam String userId) {
+        return ResultJson.success(doctorService.listByUserID(userId));
+    }
+
+    @RequestMapping("/doctor/chat")
+    public ResultJson chat(@RequestParam String userId,
+                           @RequestParam String doctorId,
+                           @RequestParam String sendId,
+                           @RequestParam String message) {
+        doctorService.chat(userId, doctorId, sendId, message);
+        return ResultJson.success();
+    }
+
+    @RequestMapping("/doctor/chat_list")
+    public ResultJson chatList(@RequestParam String userId,
+                           @RequestParam String doctorId) {
+        return ResultJson.success(doctorService.chatList(userId, doctorId));
+    }
 }

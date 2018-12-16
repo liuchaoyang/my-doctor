@@ -12,6 +12,8 @@ public interface DoctorMapper {
 
     List<DoctorVO> listByOrgId(String orgId);
 
+    List<DoctorVO> listByUserId(String userId);
+
     int insertSelective(Doctor record);
 
     Doctor selectByPrimaryKey(String userId);

@@ -50,6 +50,17 @@
     LEFT JOIN sys_doctor d on d.user_id = u.id
     WHERE o.id = #{orgId}
   </select>
+
+  <select id="listByUserId" resultMap="doctorVO">
+    select u.id as user_id, u.name_, d.profession_title, o.orgName, d.dept_name, d.skill_info, d.describe_
+    from tb_user_doctor_relation r
+    LEFT JOIN sys_doctor d on d.user_id = r.doctor_id
+    LEFT JOIN sys_user u on d.user_id = u.id
+    LEFT JOIN sys_org o on o.id = u.org_id
+    where r.user_id = #{userId}
+  </select>
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from sys_doctor
     where user_id = #{userId,jdbcType=VARCHAR}
