@@ -35,6 +35,33 @@
       #{userName,jdbcType=VARCHAR}, #{userMobile,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
       #{uploadFiles,jdbcType=VARCHAR}, #{makeDate,jdbcType=DATE}, #{makeType,jdbcType=TINYINT})
   </insert>
+
+    <select id="listByUserId" resultType="Map">
+    SELECT o.id,
+      o.doctor_id as doctorId,
+      o.user_name as patientName,
+      o.user_mobile as patientMobile,
+      o.make_date as makeDate,
+      o.make_type as makeType,
+      o.description as patientDesc,
+      o.create_time as createTime,
+      o.pay as pay,
+      o.code as code,
+
+      u.name_ as doctorName,
+      d.profession_title as professionTitle,
+      g.orgName,
+      d.dept_name as deptName,
+      d.yprice, d.price,
+      d.skill_info as skillInfo,
+      d.describe_ as description
+    FROM tb_doctor_order o
+    LEFT JOIN sys_user u on o.doctor_id = u.id
+    LEFT JOIN sys_doctor d on d.user_id = u.id
+	LEFT JOIN sys_org g on g.id = u.org_id
+    WHERE o.user_id = #{userId}
+    </select>
+
   <insert id="insertSelective" parameterType="com.doctor.model.DoctorOrder" >
     insert into tb_doctor_order
     <trim prefix="(" suffix=")" suffixOverrides="," >

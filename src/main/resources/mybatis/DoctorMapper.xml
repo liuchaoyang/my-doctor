@@ -29,7 +29,7 @@
     <result column="orgName" property="orgName" jdbcType="VARCHAR" />
     <result column="dept_name" property="deptName" jdbcType="VARCHAR" />
     <result column="skill_info" property="skillInfo" jdbcType="VARCHAR" />
-    <result column="describe_" property="describe" jdbcType="VARCHAR" />
+    <result column="describe_" property="description" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     user_id, sex, birthday, address, degree, profession_title, dept_id, dept_name, skill_info, 

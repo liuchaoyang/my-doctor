@@ -20,7 +20,7 @@ public class DoctorOrderController {
     private DoctorOrderService orderService;
 
     @RequestMapping("/doctor_order/insert")
-    public ResultJson list(@RequestParam String doctorId,
+    public ResultJson insert(@RequestParam String doctorId,
                            @RequestParam String userId,
                            @RequestParam String userName,
                            @RequestParam String userMobile,
@@ -40,5 +40,10 @@ public class DoctorOrderController {
                 .build();
         orderService.insert(order);
         return ResultJson.success();
+    }
+
+    @RequestMapping("/doctor_order/list_by_user")
+    public ResultJson listByUserId(@RequestParam String userId) {
+        return ResultJson.success(orderService.listByUserId(userId));
     }
 }

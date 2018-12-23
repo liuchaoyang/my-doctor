@@ -13,7 +13,7 @@ public class DoctorVO {
 
     private String skillInfo;
 
-    private String describe;
+    private String description;
 
     public String getUserId() {
         return userId;
@@ -63,11 +63,11 @@ public class DoctorVO {
         this.skillInfo = skillInfo;
     }
 
-    public String getDescribe() {
-        return describe;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescribe(String describe) {
-        this.describe = describe;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
