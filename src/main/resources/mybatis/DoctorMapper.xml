@@ -44,7 +44,7 @@
   </select>
 
   <select id="listByOrgId" resultMap="doctorVO">
-    SELECT u.id as user_id, u.name_, d.profession_title, o.orgName, d.dept_name, d.skill_info, d.describe_
+    SELECT u.id as user_id, u.name_, d.profession_title, o.orgName, d.dept_name, d.yprice, d.price, d.skill_info, d.describe_
     FROM sys_org o
     LEFT JOIN sys_user u on o.id = u.org_id
     LEFT JOIN sys_doctor d on d.user_id = u.id

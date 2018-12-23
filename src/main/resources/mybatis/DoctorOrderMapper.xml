@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.doctor.mapper.DoctorOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.doctor.model.DoctorOrder" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="doctor_id" property="doctorId" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_mobile" property="userMobile" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="upload_files" property="uploadFiles" jdbcType="VARCHAR" />
+    <result column="make_date" property="makeDate" jdbcType="DATE" />
+    <result column="make_type" property="makeType" jdbcType="TINYINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, doctor_id, user_id, user_name, user_mobile, description, upload_files, make_date, 
+    make_type, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_doctor_order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_doctor_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.doctor.model.DoctorOrder" >
+    insert into tb_doctor_order (id, doctor_id, user_id, 
+      user_name, user_mobile, description, 
+      upload_files, make_date, make_type)
+    values (#{id,jdbcType=INTEGER}, #{doctorId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{userName,jdbcType=VARCHAR}, #{userMobile,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{uploadFiles,jdbcType=VARCHAR}, #{makeDate,jdbcType=DATE}, #{makeType,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.doctor.model.DoctorOrder" >
+    insert into tb_doctor_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="doctorId != null" >
+        doctor_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userMobile != null" >
+        user_mobile,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="uploadFiles != null" >
+        upload_files,
+      </if>
+      <if test="makeDate != null" >
+        make_date,
+      </if>
+      <if test="makeType != null" >
+        make_type,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="doctorId != null" >
+        #{doctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userMobile != null" >
+        #{userMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadFiles != null" >
+        #{uploadFiles,jdbcType=VARCHAR},
+      </if>
+      <if test="makeDate != null" >
+        #{makeDate,jdbcType=DATE},
+      </if>
+      <if test="makeType != null" >
+        #{makeType,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.doctor.model.DoctorOrder" >
+    update tb_doctor_order
+    <set >
+      <if test="doctorId != null" >
+        doctor_id = #{doctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userMobile != null" >
+        user_mobile = #{userMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadFiles != null" >
+        upload_files = #{uploadFiles,jdbcType=VARCHAR},
+      </if>
+      <if test="makeDate != null" >
+        make_date = #{makeDate,jdbcType=DATE},
+      </if>
+      <if test="makeType != null" >
+        make_type = #{makeType,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.doctor.model.DoctorOrder" >
+    update tb_doctor_order
+    set doctor_id = #{doctorId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_mobile = #{userMobile,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      upload_files = #{uploadFiles,jdbcType=VARCHAR},
+      make_date = #{makeDate,jdbcType=DATE},
+      make_type = #{makeType,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
