@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.doctor.mapper.BusinessOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.doctor.model.BusinessOrder" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="product_id" property="productId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="count" property="count" jdbcType="INTEGER" />
+    <result column="pay" property="pay" jdbcType="DECIMAL" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, product_id, user_id, count, pay, update_time, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_business_order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_business_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.doctor.model.BusinessOrder" >
+    insert into tb_business_order (id, product_id, user_id, 
+      count, pay)
+    values (#{id,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, 
+      #{count,jdbcType=INTEGER}, #{pay,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.doctor.model.BusinessOrder" >
+    insert into tb_business_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="count != null" >
+        count,
+      </if>
+      <if test="pay != null" >
+        pay,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="count != null" >
+        #{count,jdbcType=INTEGER},
+      </if>
+      <if test="pay != null" >
+        #{pay,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.doctor.model.BusinessOrder" >
+    update tb_business_order
+    <set >
+      <if test="productId != null" >
+        product_id = #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="count != null" >
+        count = #{count,jdbcType=INTEGER},
+      </if>
+      <if test="pay != null" >
+        pay = #{pay,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.doctor.model.BusinessOrder" >
+    update tb_business_order
+    set product_id = #{productId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=VARCHAR},
+      count = #{count,jdbcType=INTEGER},
+      pay = #{pay,jdbcType=DECIMAL},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -38,5 +38,7 @@
         <!--<table tableName="tb_user_doctor_chat" domainObjectName="UserDoctorChat" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
         <!--<table tableName="tb_doctor_order" domainObjectName="DoctorOrder" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
         <!--<table tableName="tb_recommend_newer" domainObjectName="RecommendNewer" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
+        <table tableName="tb_product" domainObjectName="Product" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="tb_business_order" domainObjectName="BusinessOrder" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
     </context>
 </generatorConfiguration>
