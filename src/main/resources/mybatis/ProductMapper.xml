@@ -33,7 +33,7 @@
     delete from tb_product
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.doctor.model.Product" >
+  <insert id="insert" parameterType="com.doctor.model.Product" keyProperty="id" useGeneratedKeys="true">
     insert into tb_product (id, name, summary, 
       yprice, price, logo, banner, detail
       )
@@ -118,6 +118,9 @@
       <if test="price != null" >
         price = #{price,jdbcType=DECIMAL},
       </if>
+      <if test="logo != null" >
+        logo = #{logo,jdbcType=VARCHAR},
+      </if>
       <if test="banner != null" >
         banner = #{banner,jdbcType=VARCHAR},
       </if>
@@ -140,9 +143,7 @@
       yprice = #{yprice,jdbcType=DECIMAL},
       price = #{price,jdbcType=DECIMAL},
       banner = #{banner,jdbcType=VARCHAR},
-      detail = #{detail,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
+      detail = #{detail,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

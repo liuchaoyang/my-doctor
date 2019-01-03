@@ -1,8 +1,15 @@
 package com.doctor.model;
 
+import lombok.Builder;
+import lombok.Data;
+import lombok.ToString;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
+@Data
+@Builder
+@ToString
 public class Product {
     private Integer id;
 
