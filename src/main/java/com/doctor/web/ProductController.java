@@ -4,12 +4,10 @@ import com.doctor.common.ResultJson;
 import com.doctor.model.Product;
 import com.doctor.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
 
 @RestController
@@ -45,11 +43,29 @@ public class ProductController {
                 .summary(summary)
                 .yprice(yprice)
                 .price(price)
-                .logo(logo != null? logo.getOriginalFilename() : null)
+//                .logo(logo != null? logo.getOriginalFilename() : null)
                 .banner(banner != null? banner.getOriginalFilename() : null)
                 .detail(detail != null? detail.getOriginalFilename() : null)
                 .build();
         productService.insertWithFiles(product, logo, banner, detail);
+        return ResultJson.success();
+    }
+
+    @RequestMapping("/product/{productId}/logo")
+    public ResultJson getImage(@PathVariable("productId") int productId, HttpServletResponse response) {
+        productService.getProductLogo(productId, response);
+        return ResultJson.success();
+    }
+
+    @RequestMapping("/product/{productId}/banner_file")
+    public ResultJson getBannerFile(@PathVariable("productId") int productId, HttpServletResponse response) {
+        productService.getProductBanner(productId, response);
+        return ResultJson.success();
+    }
+
+    @RequestMapping("/product/{productId}/detail_file")
+    public ResultJson getDetailFile(@PathVariable("productId") int productId, HttpServletResponse response) {
+        productService.getProductDetailFile(productId, response);
         return ResultJson.success();
     }
 }

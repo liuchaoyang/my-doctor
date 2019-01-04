@@ -7,15 +7,17 @@
     <result column="summary" property="summary" jdbcType="VARCHAR" />
     <result column="yprice" property="yprice" jdbcType="DECIMAL" />
     <result column="price" property="price" jdbcType="DECIMAL" />
-    <result column="logo" property="logo" jdbcType="VARCHAR" />
+    <result column="logo" property="logo" jdbcType="LONGVARBINARY" />
     <result column="banner" property="banner" jdbcType="VARCHAR" />
     <result column="detail" property="detail" jdbcType="VARCHAR" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
+
   <sql id="Base_Column_List" >
     id, name, summary, yprice, price, logo, banner, detail, update_time, create_time
   </sql>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -24,85 +26,28 @@
   </select>
 
   <select id="listAll" resultMap="BaseResultMap">
-    SELECT *
+    SELECT
+    <include refid="Base_Column_List" />
     FROM tb_product
     ORDER BY update_time DESC
   </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from tb_product
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
+  <select id="findLogo" resultType="Byte">
+    SELECT logo
+    FROM tb_product
+    WHERE id = #{id}
+  </select>
+
   <insert id="insert" parameterType="com.doctor.model.Product" keyProperty="id" useGeneratedKeys="true">
     insert into tb_product (id, name, summary, 
       yprice, price, logo, banner, detail
       )
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, 
-      #{yprice,jdbcType=DECIMAL}, #{price,jdbcType=DECIMAL}, #{banner,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR},
+      #{yprice,jdbcType=DECIMAL}, #{price,jdbcType=DECIMAL}, #{logo,jdbcType=LONGVARBINARY}, #{banner,jdbcType=VARCHAR},
       #{detail,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.doctor.model.Product" >
-    insert into tb_product
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="name != null" >
-        name,
-      </if>
-      <if test="summary != null" >
-        summary,
-      </if>
-      <if test="yprice != null" >
-        yprice,
-      </if>
-      <if test="price != null" >
-        price,
-      </if>
-      <if test="banner != null" >
-        banner,
-      </if>
-      <if test="detail != null" >
-        detail,
-      </if>
-      <if test="updateTime != null" >
-        update_time,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="summary != null" >
-        #{summary,jdbcType=VARCHAR},
-      </if>
-      <if test="yprice != null" >
-        #{yprice,jdbcType=DECIMAL},
-      </if>
-      <if test="price != null" >
-        #{price,jdbcType=DECIMAL},
-      </if>
-      <if test="banner != null" >
-        #{banner,jdbcType=VARCHAR},
-      </if>
-      <if test="detail != null" >
-        #{detail,jdbcType=VARCHAR},
-      </if>
-      <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.doctor.model.Product" >
     update tb_product
     <set >
@@ -119,7 +64,7 @@
         price = #{price,jdbcType=DECIMAL},
       </if>
       <if test="logo != null" >
-        logo = #{logo,jdbcType=VARCHAR},
+        logo = #{logo,jdbcType=LONGVARBINARY},
       </if>
       <if test="banner != null" >
         banner = #{banner,jdbcType=VARCHAR},
@@ -142,6 +87,7 @@
       summary = #{summary,jdbcType=VARCHAR},
       yprice = #{yprice,jdbcType=DECIMAL},
       price = #{price,jdbcType=DECIMAL},
+      logo = #{logo,jdbcType=LONGVARBINARY},
       banner = #{banner,jdbcType=VARCHAR},
       detail = #{detail,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
