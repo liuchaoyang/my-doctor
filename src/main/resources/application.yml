@@ -20,6 +20,11 @@ spring:
     multipart:
       max-file-size: 10MB
       max-request-size: 20MB
+
+sms:
+  access_key: LTAI4tzTtdBeG8wX
+  access_key_secret: KTjyBTaYmF6FiswAPWhN2HL3XqKtbi
+
 mybatis:
   mapper-locations: classpath:mybatis/*.xml
 #  configuration:
