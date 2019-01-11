@@ -2,6 +2,9 @@ package com.doctor.mapper;
 
 import com.doctor.model.BusinessOrder;
 
+import java.util.List;
+import java.util.Map;
+
 public interface BusinessOrderMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +17,6 @@ public interface BusinessOrderMapper {
     int updateByPrimaryKeySelective(BusinessOrder record);
 
     int updateByPrimaryKey(BusinessOrder record);
+
+    List<Map<String, Object>> listByUserId(String userId);
 }

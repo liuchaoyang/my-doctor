@@ -1,6 +1,8 @@
 package com.doctor.service;
 
+import com.doctor.mapper.BusinessOrderMapper;
 import com.doctor.mapper.ProductMapper;
+import com.doctor.model.BusinessOrder;
 import com.doctor.model.Product;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,12 +11,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.rowset.serial.SerialBlob;
 import java.io.*;
-import java.sql.Blob;
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ProductService {
@@ -23,6 +24,8 @@ public class ProductService {
 
     @Autowired
     private ProductMapper productMapper;
+    @Autowired
+    private BusinessOrderMapper businessOrderMapper;
 
     public List<Product> listAll() {
         return productMapper.listAll();
@@ -133,6 +136,28 @@ public class ProductService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public int order(int productId, String userId, int count, BigDecimal pay) {
+        BusinessOrder order = new BusinessOrder();
+        order.setProductId(productId);
+        order.setUserId(userId);
+        order.setCount(count);
+        order.setPay(pay);
+        businessOrderMapper.insert(order);
+        logger.info("Product order insert:{}", order);
+        return order.getId();
+    }
+
+    public void orderConfirm(int orderId) {
+        BusinessOrder order = businessOrderMapper.selectByPrimaryKey(orderId);
+        order.setStatus(1);
+        businessOrderMapper.updateByPrimaryKeySelective(order);
+        logger.info("Product order confirm:{}", order);
+    }
+
+    public List<Map<String,Object>> listByUserId(String userId) {
+        return businessOrderMapper.listByUserId(userId);
     }
 
     enum FileCate {

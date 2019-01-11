@@ -14,6 +14,7 @@ public class BusinessOrder {
 
     private BigDecimal pay;
 
+    private Integer status;
     private Date updateTime;
 
     private Date createTime;
@@ -48,6 +49,14 @@ public class BusinessOrder {
 
     public void setCount(Integer count) {
         this.count = count;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public BigDecimal getPay() {

@@ -68,4 +68,23 @@ public class ProductController {
         productService.getProductDetailFile(productId, response);
         return ResultJson.success();
     }
+
+    @RequestMapping("/order/{productId}/{userId}")
+    public ResultJson order(@PathVariable("productId") int productId,
+                            @PathVariable("userId") String userId,
+                            @RequestParam int count,
+                            @RequestParam BigDecimal pay) {
+        return ResultJson.success(productService.order(productId, userId, count, pay));
+    }
+
+    @RequestMapping("/order/{orderId}/confirm")
+    public ResultJson orderConfirm(@PathVariable("orderId") int orderId) {
+        productService.orderConfirm(orderId);
+        return ResultJson.success();
+    }
+
+    @RequestMapping("/order/list_by_user")
+    public ResultJson orderConfirm(@RequestParam String userId) {
+        return ResultJson.success(productService.listByUserId(userId));
+    }
 }
