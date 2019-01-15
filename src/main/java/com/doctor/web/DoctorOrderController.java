@@ -27,7 +27,7 @@ public class DoctorOrderController {
                            @RequestParam String description,
                            @RequestParam Date makeDate,
                            @RequestParam Byte makeType,
-                           @RequestParam MultipartFile file) {
+                           @RequestParam(required = false) MultipartFile file) {
         DoctorOrder order = DoctorOrder.builder()
                 .doctorId(doctorId)
                 .userId(userId)

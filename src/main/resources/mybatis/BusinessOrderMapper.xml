@@ -25,7 +25,7 @@
   <select id="listByUserId" resultType="Map">
     select
     o.id, o.product_id as productId, o.user_id as userId, o.count, o.pay, o.status,
-    p.name as productName, p.summary, p.yprice, p.price, p.logo, p.banner, p.detail
+    p.name as productName, p.summary, p.yprice, p.price, p.logo
     from tb_business_order o
     left join tb_product p on o.product_id = p.id
     where o.user_id = #{userId}
