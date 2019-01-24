@@ -34,9 +34,9 @@ public class ProductController {
                                  String summary,
                                  BigDecimal yprice,
                                  BigDecimal price,
-                                 MultipartFile logo,
-                                 MultipartFile banner,
-                                 MultipartFile detail) throws Exception {
+                                 @RequestParam(required = false) MultipartFile logo,
+                                 @RequestParam(required = false) MultipartFile banner,
+                                 @RequestParam(required = false) MultipartFile detail) throws Exception {
         Product product = Product.builder()
                 .id(id)
                 .name(name)

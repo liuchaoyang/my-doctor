@@ -37,6 +37,7 @@ public class ProductService {
 
     @Transactional(rollbackFor = Exception.class)
     public void insertWithFiles(Product product, MultipartFile logo, MultipartFile banner, MultipartFile detail) throws Exception {
+        logger.info("Insert product:{}", product);
         if (logo != null) {
             product.setLogo(logo.getBytes());
         }
