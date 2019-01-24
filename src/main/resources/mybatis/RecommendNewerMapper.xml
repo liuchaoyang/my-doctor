@@ -21,7 +21,7 @@
     delete from tb_recommend_newer
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.doctor.model.RecommendNewer" >
+  <insert id="insert" parameterType="com.doctor.model.RecommendNewer" useGeneratedKeys="true" keyProperty="id">
     insert into tb_recommend_newer (user_id, name, mobile)
     values (#{userId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
       #{mobile,jdbcType=VARCHAR})
