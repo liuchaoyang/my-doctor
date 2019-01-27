@@ -2,6 +2,7 @@ package com.doctor.web;
 
 import com.doctor.common.ResultJson;
 import com.doctor.model.PhysicalOrder;
+import com.doctor.model.PhysicalTherapy;
 import com.doctor.service.PhysicalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,6 +36,14 @@ public class PhysicalController {
     @RequestMapping("/physical/order/list")
     public ResultJson listByUser(@RequestParam String userId) {
         return ResultJson.success(physicalService.listByUser(userId));
+    }
+
+    //----------------------------------分割线---------------------------------------
+    //admin接口
+    @RequestMapping("/admin/physical/insert")
+    public ResultJson physicalInsert(@RequestBody PhysicalTherapy physicalTherapy) {
+        physicalService.save(physicalTherapy);
+        return ResultJson.success();
     }
 
 }
