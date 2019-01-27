@@ -4,6 +4,7 @@ import com.doctor.mapper.PhysicalOrderMapper;
 import com.doctor.mapper.PhysicalTherapyMapper;
 import com.doctor.mapper.UserMapper;
 import com.doctor.model.PhysicalOrder;
+import com.doctor.model.PhysicalTherapy;
 import com.doctor.model.User;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,5 +57,13 @@ public class PhysicalService {
 
     public List<Map<String, Object>> listByUser(String userId) {
         return orderMapper.listByUserId(userId);
+    }
+
+    public void save(PhysicalTherapy physicalTherapy) {
+        if (physicalTherapy.getId() == null) {
+            physicalTherapyMapper.insertSelective(physicalTherapy);
+        } else {
+            physicalTherapyMapper.updateByPrimaryKeySelective(physicalTherapy);
+        }
     }
 }
