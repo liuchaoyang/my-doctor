@@ -41,9 +41,20 @@ public class PhysicalController {
     //----------------------------------分割线---------------------------------------
     //admin接口
     @RequestMapping("/admin/physical/insert")
-    public ResultJson physicalInsert(@RequestBody PhysicalTherapy physicalTherapy) {
+    public ResultJson physicalInsert(Integer id, String name, String summary, String orgId, String doctorIds) {
+        PhysicalTherapy physicalTherapy = new PhysicalTherapy();
+        physicalTherapy.setId(id);
+        physicalTherapy.setName(name);
+        physicalTherapy.setSummary(summary);
+        physicalTherapy.setOrgId(orgId);
+        physicalTherapy.setDoctorIds(doctorIds);
         physicalService.save(physicalTherapy);
         return ResultJson.success();
+    }
+
+    @RequestMapping("/admin/physical/list")
+    public ResultJson listAll() {
+        return ResultJson.success(physicalService.listAll());
     }
 
 }

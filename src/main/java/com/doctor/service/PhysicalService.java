@@ -66,4 +66,8 @@ public class PhysicalService {
             physicalTherapyMapper.updateByPrimaryKeySelective(physicalTherapy);
         }
     }
+
+    public List<Map<String, Object>> listAll() {
+        return physicalTherapyMapper.listAll();
+    }
 }
