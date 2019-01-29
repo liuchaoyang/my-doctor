@@ -1,6 +1,7 @@
 package com.doctor.web;
 
 import com.doctor.common.ResultJson;
+import com.doctor.exception.APIBaseException;
 import com.doctor.model.RecommendNewer;
 import com.doctor.service.RecommendService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class RecommendController {
     @RequestMapping("/recommend/insert")
     public ResultJson insert(@RequestParam String userId,
                              @RequestParam String name,
-                             @RequestParam String mobile) {
+                             @RequestParam String mobile) throws APIBaseException {
         RecommendNewer newer = RecommendNewer.builder()
                 .userId(userId)
                 .name(name)

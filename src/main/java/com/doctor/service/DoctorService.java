@@ -41,7 +41,11 @@ public class DoctorService {
         UserDoctorRelation relation = new UserDoctorRelation();
         relation.setUserId(userId);
         relation.setDoctorId(doctorId);
-        userDoctorRelationMapper.insert(relation);
+        try {
+            userDoctorRelationMapper.insert(relation);
+        } catch (Exception e) {
+            throw UserException.DOCTOR_BINDED;
+        }
     }
 
     public List<DoctorVO> listByUserID(String userId) {

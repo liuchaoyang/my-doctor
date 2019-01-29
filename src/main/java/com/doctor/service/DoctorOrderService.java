@@ -15,7 +15,7 @@ public class DoctorOrderService {
     private DoctorOrderMapper orderMapper;
 
     public void insert(DoctorOrder order) {
-        orderMapper.insert(order);
+        orderMapper.insertSelective(order);
     }
 
     public List<Map<String, Object>> listByUserId(String userId) {

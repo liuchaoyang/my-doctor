@@ -1,5 +1,7 @@
 package com.doctor.service;
 
+import com.doctor.exception.APIBaseException;
+import com.doctor.exception.UserException;
 import com.doctor.mapper.RecommendNewerMapper;
 import com.doctor.mapper.UserScoreMapper;
 import com.doctor.model.RecommendNewer;
@@ -18,9 +20,12 @@ public class RecommendService {
 
 
     @Transactional
-    public void insert(RecommendNewer newer) {
-        recommendNewerMapper.insert(newer);
-
+    public void insert(RecommendNewer newer) throws APIBaseException {
+        try {
+            recommendNewerMapper.insert(newer);
+        }catch (Exception e) {
+            throw UserException.USER_EXIST;
+        }
         UserScore score = new UserScore();
         score.setUserId(newer.getUserId());
         score.setRefUserId(String.valueOf(newer.getId()));

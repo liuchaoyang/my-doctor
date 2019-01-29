@@ -28,6 +28,8 @@ public class DoctorOrder {
 
     private Date makeDate;
 
+    private Integer status;
+
     private Byte makeType;
 
     private Date createTime;

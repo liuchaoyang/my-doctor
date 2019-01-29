@@ -19,7 +19,7 @@ public class PhysicalOrder {
 
     private Integer physicalId;
 
-    private Byte status;
+    private Integer status;
 
     private Date createTime;
 
@@ -89,11 +89,11 @@ public class PhysicalOrder {
         this.physicalId = physicalId;
     }
 
-    public Byte getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Byte status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

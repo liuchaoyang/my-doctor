@@ -11,11 +11,12 @@
     <result column="upload_files" property="uploadFiles" jdbcType="VARCHAR" />
     <result column="make_date" property="makeDate" jdbcType="DATE" />
     <result column="make_type" property="makeType" jdbcType="TINYINT" />
+    <result column="status" property="status" jdbcType="TINYINT" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, doctor_id, user_id, user_name, user_mobile, description, upload_files, make_date, 
-    make_type, create_time
+    id, doctor_id, user_id, user_name, user_mobile, description, upload_files, make_date,
+    make_type, status, create_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -47,6 +48,7 @@
       o.create_time as createTime,
       o.pay as pay,
       o.code as code,
+      o.status as status,
 
       u.name_ as doctorName,
       d.profession_title as professionTitle,
@@ -92,6 +94,9 @@
       <if test="makeType != null" >
         make_type,
       </if>
+      <if test="status != null" >
+        status,
+      </if>
       <if test="createTime != null" >
         create_time,
       </if>
@@ -123,6 +128,9 @@
       </if>
       <if test="makeType != null" >
         #{makeType,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
       </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
@@ -156,6 +164,9 @@
       <if test="makeType != null" >
         make_type = #{makeType,jdbcType=TINYINT},
       </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -172,6 +183,7 @@
       upload_files = #{uploadFiles,jdbcType=VARCHAR},
       make_date = #{makeDate,jdbcType=DATE},
       make_type = #{makeType,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
