@@ -3,6 +3,7 @@ package com.doctor.service;
 import com.doctor.exception.APIBaseException;
 import com.doctor.exception.UserException;
 import com.doctor.mapper.RecommendNewerMapper;
+import com.doctor.mapper.UserMapper;
 import com.doctor.mapper.UserScoreMapper;
 import com.doctor.model.RecommendNewer;
 import com.doctor.model.UserScore;
@@ -17,13 +18,19 @@ public class RecommendService {
     private RecommendNewerMapper recommendNewerMapper;
     @Autowired
     private UserScoreMapper userScoreMapper;
+    @Autowired
+    private UserMapper userMapper;
 
 
     @Transactional
     public void insert(RecommendNewer newer) throws APIBaseException {
+        int existed = userMapper.existedMobile(newer.getMobile());
+        if (existed > 0) {
+            throw UserException.USER_EXIST;
+        }
         try {
             recommendNewerMapper.insert(newer);
-        }catch (Exception e) {
+        } catch (Exception e) {
             throw UserException.USER_EXIST;
         }
         UserScore score = new UserScore();
