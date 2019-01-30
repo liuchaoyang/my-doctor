@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.doctor.mapper.HomeBannerMapper" >
+  <resultMap id="BaseResultMap" type="com.doctor.model.HomeBanner" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="pic_1" property="pic1" jdbcType="VARCHAR" />
+    <result column="pic_2" property="pic2" jdbcType="VARCHAR" />
+    <result column="pic_3" property="pic3" jdbcType="VARCHAR" />
+    <result column="pic_4" property="pic4" jdbcType="VARCHAR" />
+    <result column="pic_5" property="pic5" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, pic_1, pic_2, pic_3, pic_4, pic_5, update_time, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_home_banner
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_home_banner
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.doctor.model.HomeBanner" >
+    insert into tb_home_banner (id, pic_1, pic_2, 
+      pic_3, pic_4, pic_5, update_time, 
+      create_time)
+    values (#{id,jdbcType=INTEGER}, #{pic1,jdbcType=VARCHAR}, #{pic2,jdbcType=VARCHAR}, 
+      #{pic3,jdbcType=VARCHAR}, #{pic4,jdbcType=VARCHAR}, #{pic5,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.doctor.model.HomeBanner" >
+    insert into tb_home_banner
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="pic1 != null" >
+        pic_1,
+      </if>
+      <if test="pic2 != null" >
+        pic_2,
+      </if>
+      <if test="pic3 != null" >
+        pic_3,
+      </if>
+      <if test="pic4 != null" >
+        pic_4,
+      </if>
+      <if test="pic5 != null" >
+        pic_5,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="pic1 != null" >
+        #{pic1,jdbcType=VARCHAR},
+      </if>
+      <if test="pic2 != null" >
+        #{pic2,jdbcType=VARCHAR},
+      </if>
+      <if test="pic3 != null" >
+        #{pic3,jdbcType=VARCHAR},
+      </if>
+      <if test="pic4 != null" >
+        #{pic4,jdbcType=VARCHAR},
+      </if>
+      <if test="pic5 != null" >
+        #{pic5,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.doctor.model.HomeBanner" >
+    update tb_home_banner
+    <set >
+      <if test="pic1 != null" >
+        pic_1 = #{pic1,jdbcType=VARCHAR},
+      </if>
+      <if test="pic2 != null" >
+        pic_2 = #{pic2,jdbcType=VARCHAR},
+      </if>
+      <if test="pic3 != null" >
+        pic_3 = #{pic3,jdbcType=VARCHAR},
+      </if>
+      <if test="pic4 != null" >
+        pic_4 = #{pic4,jdbcType=VARCHAR},
+      </if>
+      <if test="pic5 != null" >
+        pic_5 = #{pic5,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.doctor.model.HomeBanner" >
+    update tb_home_banner
+    set pic_1 = #{pic1,jdbcType=VARCHAR},
+      pic_2 = #{pic2,jdbcType=VARCHAR},
+      pic_3 = #{pic3,jdbcType=VARCHAR},
+      pic_4 = #{pic4,jdbcType=VARCHAR},
+      pic_5 = #{pic5,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

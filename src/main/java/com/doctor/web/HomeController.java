@@ -1,13 +1,15 @@
 package com.doctor.web;
 
 import com.doctor.common.ResultJson;
-import com.doctor.exception.APIBaseException;
-import com.doctor.util.EnvUtils;
-import com.doctor.util.ExportExcel;
+import com.doctor.service.HomeBannerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -17,38 +19,32 @@ public class HomeController {
     private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
 
     @Autowired
-    private EnvUtils envUtils;
+    private HomeBannerService bannerService;
 
     @RequestMapping("/index")
     public String index() {
         return "hello, man!";
     }
 
-    @RequestMapping("/user/export")
-    public void export(HttpServletResponse response) throws IOException {
-        ExportExcel.export(response);
+    @RequestMapping("/home/banner/list")
+    public ResultJson show() throws IOException {
+        return ResultJson.success(bannerService.getBannerFileNames());
     }
 
-
-    @RequestMapping("/test/active_profile")
-    public Object activeProfile() throws IOException, APIBaseException {
-        return ResultJson.success(envUtils.activeEnv());
+    @RequestMapping("/home/banner/show")
+    public ResultJson show(@RequestParam String name, HttpServletResponse response) throws IOException {
+        bannerService.show(name, response);
+        return ResultJson.success();
     }
 
-    @PostMapping("/test/post")
-    public Object post(@RequestParam String orderIds,
-                       @RequestParam int type) {
-        System.out.println(orderIds);
+    @RequestMapping("/home/banner/upload/{index}")
+    public ResultJson upload(@PathVariable int index,
+                       MultipartFile file) throws Exception {
+        bannerService.upload(index, file);
         return ResultJson.success();
     }
 
 
-    @GetMapping("/test/301")
-    public Object test301(HttpServletResponse response) throws IOException {
-        response.sendRedirect("http://www.baidu.com");
-
-        return ResultJson.success();
-    }
 
 
 }

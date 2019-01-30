@@ -35,6 +35,9 @@ logging:
   level:
      com.example.demo.dao : debug
 
+dir:
+  product: "/Users/liuchaoyang/Documents/java/demo/my-doctor/product/"
+  banner: "/Users/liuchaoyang/Documents/java/demo/my-doctor/banner/"
 ---
 spring:
   profiles: dev
@@ -46,3 +49,10 @@ spring:
     url: jdbc:mysql://39.106.31.166:3306/yhhbsz?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
     username: root
     password: liuchaoyang
+dir:
+  product: "/usr/local/mydoctor/file/product/"
+  banner: "/usr/local/mydoctor/file/banner/"
+
+
+
+
