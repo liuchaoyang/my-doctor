@@ -132,21 +132,23 @@ public class HomeBannerService {
         HomeBanner banner = bannerMapper.selectByPrimaryKey(1);
         StringBuilder sb = new StringBuilder();
         if (!StringUtils.isEmpty(banner.getPic1())) {
-            sb.append(banner.getPic1());
+            sb.append(banner.getPic1()).append(",");
         }
         if (!StringUtils.isEmpty(banner.getPic2())) {
-            sb.append(banner.getPic2());
+            sb.append(banner.getPic2()).append(",");
         }
         if (!StringUtils.isEmpty(banner.getPic3())) {
-            sb.append(banner.getPic3());
+            sb.append(banner.getPic3()).append(",");
         }
         if (!StringUtils.isEmpty(banner.getPic4())) {
-            sb.append(banner.getPic4());
+            sb.append(banner.getPic4()).append(",");
         }
         if (!StringUtils.isEmpty(banner.getPic5())) {
-            sb.append(banner.getPic5());
+            sb.append(banner.getPic5()).append(",");
         }
-        return sb.toString();
+        String files = sb.toString();
+        files = files.substring(0, files.lastIndexOf(","));
+        return files;
     }
 
     private void outputFile(HttpServletResponse response, String filePath) {
