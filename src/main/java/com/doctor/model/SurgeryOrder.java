@@ -1,5 +1,7 @@
 package com.doctor.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class SurgeryOrder {
@@ -11,6 +13,7 @@ public class SurgeryOrder {
 
     private String userMobile;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date orderTime;
 
     private String orgId;
