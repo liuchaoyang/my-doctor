@@ -23,8 +23,8 @@ public class SurgeryController {
 
     @RequestMapping("/surgery/search_doctor")
     public ResultJson searchDoctor(@RequestParam String orgId,
-                             @RequestParam String physicalId) {
-        return ResultJson.success(surgeryService.searchDoctor(orgId, physicalId));
+                             @RequestParam String surgeryId) {
+        return ResultJson.success(surgeryService.searchDoctor(orgId, surgeryId));
     }
 
     @RequestMapping("/surgery/order/insert")

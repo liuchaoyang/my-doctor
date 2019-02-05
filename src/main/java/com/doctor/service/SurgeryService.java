@@ -34,8 +34,8 @@ public class SurgeryService {
         return surgeryMapper.searchNameByOrgId(orgId);
     }
 
-    public List<Map<String, Object>> searchDoctor(String orgId, String physicalId) {
-        String doctors = surgeryMapper.selectDoctors(physicalId, orgId);
+    public List<Map<String, Object>> searchDoctor(String orgId, String surgeryId) {
+        String doctors = surgeryMapper.selectDoctors(surgeryId, orgId);
         if (StringUtils.isBlank(doctors)) {
             return null;
         }

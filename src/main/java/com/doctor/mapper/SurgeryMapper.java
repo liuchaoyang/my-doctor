@@ -1,6 +1,7 @@
 package com.doctor.mapper;
 
 import com.doctor.model.Surgery;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -20,7 +21,8 @@ public interface SurgeryMapper {
 
     List<Map<String,Object>> searchNameByOrgId(String orgId);
 
-    String selectDoctors(String physicalId, String orgId);
+    String selectDoctors(@Param("id") String id,
+                         @Param("orgId") String orgId);
 
     List<Map<String,Object>> listAll();
 
