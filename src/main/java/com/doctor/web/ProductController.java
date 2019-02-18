@@ -36,7 +36,16 @@ public class ProductController {
                                  BigDecimal price,
                                  @RequestParam(required = false) MultipartFile logo,
                                  @RequestParam(required = false) MultipartFile banner,
-                                 @RequestParam(required = false) MultipartFile detail) throws Exception {
+                                 @RequestParam(value = "details", required = false) MultipartFile[] details) throws Exception {
+
+        String detailArr = "";
+        for (MultipartFile detail : details) {
+            detailArr += detail.getOriginalFilename();
+            detailArr += ",";
+        }
+        if (detailArr.lastIndexOf(",") != -1) {
+            detailArr = detailArr.substring(0, detailArr.length()-1);
+        }
         Product product = Product.builder()
                 .id(id)
                 .name(name)
@@ -45,9 +54,9 @@ public class ProductController {
                 .price(price)
 //                .logo(logo != null? logo.getOriginalFilename() : null)
                 .banner(banner != null? banner.getOriginalFilename() : null)
-                .detail(detail != null? detail.getOriginalFilename() : null)
+                .detail(detailArr)
                 .build();
-        productService.insertWithFiles(product, logo, banner, detail);
+        productService.insertWithFiles(product, logo, banner, details);
         return ResultJson.success();
     }
 
@@ -66,6 +75,14 @@ public class ProductController {
     @RequestMapping("/product/{productId}/detail_file")
     public ResultJson getDetailFile(@PathVariable("productId") int productId, HttpServletResponse response) {
         productService.getProductDetailFile(productId, response);
+        return ResultJson.success();
+    }
+
+    @RequestMapping("/product/{productId}/detail_file/{fileName}")
+    public ResultJson getDetailFile(@PathVariable("productId") int productId,
+                                    @PathVariable("fileName") String fileName,
+                                    HttpServletResponse response) {
+        productService.getProductDetailFile(productId, fileName, response);
         return ResultJson.success();
     }
 

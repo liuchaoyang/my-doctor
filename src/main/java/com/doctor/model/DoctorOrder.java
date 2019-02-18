@@ -1,15 +1,13 @@
 package com.doctor.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.Date;
 
 @Data
 @ToString
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class DoctorOrder {
     private Integer id;

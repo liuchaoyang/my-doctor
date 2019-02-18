@@ -38,7 +38,7 @@ public class ProductService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public void insertWithFiles(Product product, MultipartFile logo, MultipartFile banner, MultipartFile detail) throws Exception {
+    public void insertWithFiles(Product product, MultipartFile logo, MultipartFile banner, MultipartFile[] details) throws Exception {
         logger.info("Insert product:{}", product);
         if (logo != null) {
             product.setLogo(logo.getBytes());
@@ -52,8 +52,10 @@ public class ProductService {
         if (banner != null) {
             saveFile(banner, product.getId(), FileCate.BANNER);
         }
-        if (detail != null) {
-            saveFile(detail, product.getId(), FileCate.DETAIL);
+        for (MultipartFile detail : details) {
+            if (detail != null) {
+                saveFile(detail, product.getId(), FileCate.DETAIL);
+            }
         }
     }
 
@@ -123,6 +125,12 @@ public class ProductService {
     public void getProductDetailFile(int productId, HttpServletResponse response) {
         Product product = productMapper.selectByPrimaryKey(productId);
         String filePath = FILE_DIR + productId + "/" + product.getDetail();
+
+        outputFile(response, filePath);
+    }
+
+    public void getProductDetailFile(int productId, String fileName, HttpServletResponse response) {
+        String filePath = FILE_DIR + productId + "/" + fileName;
 
         outputFile(response, filePath);
     }
