@@ -17,4 +17,9 @@ public class OrgController {
     public ResultJson list(@RequestParam(value = "parentId", required = false) String parentId) {
         return ResultJson.success(orgService.listByParentId(parentId));
     }
+
+    @RequestMapping("/org/all")
+    public ResultJson list() {
+        return ResultJson.success(orgService.listAll());
+    }
 }
