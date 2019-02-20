@@ -28,6 +28,8 @@
     <result column="profession_title" property="professionTitle" jdbcType="VARCHAR" />
     <result column="orgName" property="orgName" jdbcType="VARCHAR" />
     <result column="dept_name" property="deptName" jdbcType="VARCHAR" />
+    <result column="yprice" property="yprice" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="INTEGER" />
     <result column="skill_info" property="skillInfo" jdbcType="VARCHAR" />
     <result column="describe_" property="description" jdbcType="VARCHAR" />
   </resultMap>

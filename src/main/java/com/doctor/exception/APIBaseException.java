@@ -8,7 +8,7 @@ public class APIBaseException extends Exception {
     public static final APIBaseException MOBILE_INVALID = new APIBaseException(601, "请填写正确的手机号");
     public static final APIBaseException USER_NOT_EXIST = new APIBaseException(602, "用户不存在");
     public static final APIBaseException DOCTOR_NOT_EXIST = new APIBaseException(603, "医生不存在");
-    public static final APIBaseException DOCTOR_BINDED = new APIBaseException(604, "您已经绑定过该医生");
+    public static final APIBaseException DOCTOR_BINDED = new APIBaseException(604, "已绑定");
     public static final APIBaseException ORDER_NOT_EXIST = new APIBaseException(605, "订单不存在");
 
 
