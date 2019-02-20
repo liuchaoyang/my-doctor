@@ -28,7 +28,7 @@
   <select id="listByUserId" resultType="Map">
     SELECT o.id, p.`name`, o.order_time as orderTime, o.`status`
     FROM tb_surgery_order o
-    LEFT JOIN tb_physical_therapy p ON o.surgery_id = p.id
+    LEFT JOIN tb_surgery p ON o.surgery_id = p.id
     WHERE o.user_id = #{userId}
   </select>
 
