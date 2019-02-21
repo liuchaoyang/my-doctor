@@ -4,6 +4,7 @@ import com.doctor.model.Doctor;
 import com.doctor.model.DoctorVO;
 
 import java.util.List;
+import java.util.Map;
 
 public interface DoctorMapper {
     int deleteByPrimaryKey(String userId);
@@ -13,6 +14,8 @@ public interface DoctorMapper {
     List<DoctorVO> listByOrgId(String orgId);
 
     List<DoctorVO> listByUserId(String userId);
+
+    List<Map<String, Object>> listMyPatient(String doctorId);
 
     int insertSelective(Doctor record);
 

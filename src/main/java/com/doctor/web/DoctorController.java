@@ -44,4 +44,16 @@ public class DoctorController {
                            @RequestParam String doctorId) {
         return ResultJson.success(doctorService.chatList(userId, doctorId));
     }
+
+
+    //医生登陆聊天
+    @RequestMapping("/doctor/check")
+    public ResultJson check(@RequestParam String userId) {
+        return ResultJson.success(doctorService.check(userId));
+    }
+
+    @RequestMapping("/doctor/my_patient")
+    public ResultJson patient(@RequestParam String doctorId) {
+        return ResultJson.success(doctorService.listMyPatient(doctorId));
+    }
 }

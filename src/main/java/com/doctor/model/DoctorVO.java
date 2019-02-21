@@ -11,6 +11,10 @@ public class DoctorVO {
 
     private String deptName;
 
+    private Integer yprice;
+
+    private Integer price;
+
     private String skillInfo;
 
     private String description;
@@ -69,5 +73,21 @@ public class DoctorVO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Integer getYprice() {
+        return yprice;
+    }
+
+    public void setYprice(Integer yprice) {
+        this.yprice = yprice;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
     }
 }

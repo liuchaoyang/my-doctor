@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class DoctorService {
@@ -65,5 +66,14 @@ public class DoctorService {
     public List<UserDoctorChat> chatList(String userId, String doctorId) {
         return chatMapper.list(userId, doctorId);
 
+    }
+
+    public int check(String userId) {
+        Doctor doctor = doctorMapper.selectByPrimaryKey(userId);
+        return doctor==null?0:1;
+    }
+
+    public List<Map<String, Object>> listMyPatient(String doctorId) {
+        return doctorMapper.listMyPatient(doctorId);
     }
 }

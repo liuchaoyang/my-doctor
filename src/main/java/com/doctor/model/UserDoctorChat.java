@@ -1,5 +1,7 @@
 package com.doctor.model;
 
+import java.util.Date;
+
 public class UserDoctorChat {
     private Integer id;
 
@@ -10,6 +12,16 @@ public class UserDoctorChat {
     private String message;
 
     private String doctorId;
+
+    private Date createTime;
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 
     public Integer getId() {
         return id;

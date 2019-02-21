@@ -62,6 +62,13 @@
     where r.user_id = #{userId}
   </select>
 
+  <select id="listMyPatient" resultType="Map">
+    select u.id as userId, u.name_ as userName
+    from tb_user_doctor_relation r
+    LEFT JOIN sys_user u on r.user_id = u.id
+    where r.doctor_id = #{doctorId}
+  </select>
+
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from sys_doctor

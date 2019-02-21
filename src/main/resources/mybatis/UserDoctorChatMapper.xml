@@ -7,9 +7,10 @@
     <result column="send_id" property="sendId" jdbcType="VARCHAR" />
     <result column="message" property="message" jdbcType="VARCHAR" />
     <result column="doctor_id" property="doctorId" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, user_id, doctor_id, send_id, message
+    id, user_id, doctor_id, send_id, message, create_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
