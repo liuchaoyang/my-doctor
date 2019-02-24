@@ -4,6 +4,7 @@ import com.doctor.mapper.BusinessOrderMapper;
 import com.doctor.mapper.ProductMapper;
 import com.doctor.model.BusinessOrder;
 import com.doctor.model.Product;
+import com.doctor.util.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -136,16 +137,34 @@ public class ProductService {
     }
 
     private void outputFile(HttpServletResponse response, String filePath) {
+
+        FileInputStream fileInputStream = null;
+        BufferedOutputStream outputStream = null;
         try {
-            FileInputStream fileInputStream = new FileInputStream(new File(filePath));
+            fileInputStream = new FileInputStream(new File(filePath));
             byte[] buffer = new byte[1024];
-            BufferedOutputStream outputStream = new BufferedOutputStream(response.getOutputStream());
+            outputStream = new BufferedOutputStream(response.getOutputStream());
             while (fileInputStream.read(buffer) != -1) {
                 outputStream.write(buffer);
                 outputStream.flush();
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            if (fileInputStream != null) {
+                try {
+                    fileInputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (outputStream != null) {
+                try {
+                    outputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -169,6 +188,36 @@ public class ProductService {
 
     public List<Map<String,Object>> listByUserId(String userId) {
         return businessOrderMapper.listByUserId(userId);
+    }
+
+    public void uploadDetail(int productId, int index, MultipartFile file) throws Exception {
+        Product product = productMapper.selectByPrimaryKey(productId);
+        String details = product.getDetail();
+
+        //拼接大小为10的数组
+        String[] detailArr = new String[10];
+        if (details != null) {
+            String[] split = details.split(",");
+            for (int i = 0; i < split.length; i++) {
+                detailArr[i] = split[i];
+            }
+        }
+        //此次上传的文件
+        detailArr[index] = file.getOriginalFilename();
+
+        //save file
+        String filePath = FILE_DIR + productId + "/";
+        FileUtils.saveFile(file, filePath);
+
+        details = "";
+        for (String s : detailArr) {
+            details += (s==null?"":s);
+            details += ",";
+        }
+        details = details.substring(0, details.length()-1);
+        product.setDetail(details);
+        productMapper.updateByPrimaryKeySelective(product);
+
     }
 
     enum FileCate {

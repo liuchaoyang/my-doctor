@@ -60,6 +60,13 @@ public class ProductController {
         return ResultJson.success();
     }
 
+    @RequestMapping("/product/detail/upload/{index}")
+    public ResultJson upload(@PathVariable int index, int productId,
+                             MultipartFile file) throws Exception {
+        productService.uploadDetail(productId, index, file);
+        return ResultJson.success();
+    }
+
     @RequestMapping("/product/{productId}/logo")
     public ResultJson getImage(@PathVariable("productId") int productId, HttpServletResponse response) {
         productService.getProductLogo(productId, response);

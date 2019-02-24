@@ -36,6 +36,7 @@ logging:
      com.example.demo.dao : debug
 
 dir:
+  base: "/Users/liuchaoyang/Documents/java/demo/my-doctor/"
   product: "/Users/liuchaoyang/Documents/java/demo/my-doctor/product/"
   banner: "/Users/liuchaoyang/Documents/java/demo/my-doctor/banner/"
 ---
@@ -50,6 +51,7 @@ spring:
     username: root
     password: liuchaoyang
 dir:
+  base: "/usr/local/mydoctor/file/"
   product: "/usr/local/mydoctor/file/product/"
   banner: "/usr/local/mydoctor/file/banner/"
 
