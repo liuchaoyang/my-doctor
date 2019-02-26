@@ -50,7 +50,9 @@
     FROM sys_org o
     LEFT JOIN sys_user u on o.id = u.org_id
     LEFT JOIN sys_doctor d on d.user_id = u.id
+    LEFT JOIN sys_user_role ur on u.id = ur.user_id
     WHERE o.id = #{orgId}
+    AND ur.role_id = '4028739f5cf2612c015cf284aee70004'
   </select>
 
   <select id="listByUserId" resultMap="doctorVO">

@@ -5,6 +5,7 @@ import com.doctor.mapper.ProductMapper;
 import com.doctor.model.BusinessOrder;
 import com.doctor.model.Product;
 import com.doctor.util.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,17 @@ public class ProductService {
     private String FILE_DIR;
 
     public List<Product> listAll() {
-        return productMapper.listAll();
+        List<Product> list = productMapper.listAll();
+        for (Product product : list) {
+            String detail = product.getDetail();
+            if (StringUtils.isNotEmpty(detail)) {
+                detail = detail.replace(",,", ",");
+                detail = detail.replace(",,", ",");
+                detail = detail.replace(",,", ",");
+            }
+            product.setDetail(detail);
+        }
+        return list;
     }
 
     public void insert(Product product) {
