@@ -22,6 +22,12 @@
     ORDER BY p.update_time DESC
   </select>
 
+  <select id="listOrgs" resultType="Map">
+    SELECT p.org_id as id, g.orgName
+    FROM tb_surgery p
+    LEFT JOIN sys_org g on p.org_id = g.id
+  </select>
+
   <select id="searchNameByOrgId" resultType="Map">
     SELECT p.id, p.name
     FROM tb_surgery p

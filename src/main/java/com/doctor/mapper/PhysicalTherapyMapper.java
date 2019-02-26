@@ -25,4 +25,7 @@ public interface PhysicalTherapyMapper {
                          @Param("orgId") String orgId);
 
     List<Map<String, Object>> listAll();
+
+    List<Map<String, Object>> listOrgs();
+
 }

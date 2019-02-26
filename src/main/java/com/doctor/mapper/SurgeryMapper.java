@@ -26,4 +26,5 @@ public interface SurgeryMapper {
 
     List<Map<String,Object>> listAll();
 
+    List<Map<String, Object>> listOrgs();
 }

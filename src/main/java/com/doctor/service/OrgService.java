@@ -1,6 +1,8 @@
 package com.doctor.service;
 
 import com.doctor.mapper.OrgMapper;
+import com.doctor.mapper.PhysicalTherapyMapper;
+import com.doctor.mapper.SurgeryMapper;
 import com.doctor.model.Org;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,10 @@ public class OrgService {
 
     @Autowired
     private OrgMapper orgMapper;
+    @Autowired
+    private PhysicalTherapyMapper physicalTherapyMapper;
+    @Autowired
+    private SurgeryMapper surgeryMapper;
 
 
     public List<Org> listByParentId(String parentId) {
@@ -42,5 +48,13 @@ public class OrgService {
             result.add(level1);
         }
         return result;
+    }
+
+    public Object listForPhysical() {
+        return physicalTherapyMapper.listOrgs();
+    }
+
+    public Object listForSurgery() {
+        return surgeryMapper.listOrgs();
     }
 }
