@@ -19,4 +19,8 @@ public interface PhysicalOrderMapper {
     int updateByPrimaryKey(PhysicalOrder record);
 
     List<Map<String,Object>> listByUserId(String userId);
+
+    int countByParams(Map params);
+
+    List<Map<String,Object>> listByParams(Map params);
 }

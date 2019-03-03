@@ -57,4 +57,10 @@ public class SurgeryController {
         return ResultJson.success(surgeryService.listAll());
     }
 
+
+    @RequestMapping("/admin/surgery/order/list_all")
+    public ResultJson listByUserId(@RequestParam(required = false, defaultValue = "1") int page,
+                                   @RequestParam(required = false, defaultValue = "10") int pageSize) {
+        return ResultJson.success(surgeryService.listOrders(page, pageSize));
+    }
 }

@@ -19,4 +19,10 @@ public interface DoctorOrderMapper {
     int updateByPrimaryKey(DoctorOrder record);
 
     List<Map<String,Object>> listByUserId(String userId);
+
+    List<Map<String,Object>> listAll();
+
+    int countByParams(Map params);
+
+    List<Map<String,Object>> listByParams(Map params);
 }

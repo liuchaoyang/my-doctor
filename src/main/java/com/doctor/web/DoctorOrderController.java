@@ -46,4 +46,10 @@ public class DoctorOrderController {
     public ResultJson listByUserId(@RequestParam String userId) {
         return ResultJson.success(orderService.listByUserId(userId));
     }
+
+    @RequestMapping("/admin/doctor_order/list_all")
+    public ResultJson listByUserId(@RequestParam(required = false, defaultValue = "1") int page,
+                                   @RequestParam(required = false, defaultValue = "10") int pageSize) {
+        return ResultJson.success(orderService.listAll(page, pageSize));
+    }
 }

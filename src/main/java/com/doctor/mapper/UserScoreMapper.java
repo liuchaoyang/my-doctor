@@ -21,4 +21,8 @@ public interface UserScoreMapper {
     List<Map<String,Object>> listForRecommend(String userId);
 
     List<Map<String,Object>> recommendCount(String userId);
+
+    int countByParams(Map params);
+
+    List<Map<String,Object>> listByParams(Map params);
 }

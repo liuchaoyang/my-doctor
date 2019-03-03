@@ -27,4 +27,8 @@ public interface SurgeryMapper {
     List<Map<String,Object>> listAll();
 
     List<Map<String, Object>> listOrgs();
+
+    int countByParams(Map params);
+
+    List<Map<String, Object>> listByParams(Map params);
 }

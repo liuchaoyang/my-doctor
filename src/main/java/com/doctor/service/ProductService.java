@@ -1,5 +1,6 @@
 package com.doctor.service;
 
+import com.doctor.common.Pager;
 import com.doctor.mapper.BusinessOrderMapper;
 import com.doctor.mapper.ProductMapper;
 import com.doctor.model.BusinessOrder;
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -229,6 +231,20 @@ public class ProductService {
         product.setDetail(details);
         productMapper.updateByPrimaryKeySelective(product);
 
+    }
+
+    public Object list(int page, int pageSize) {
+        Map params = new HashMap();
+
+        int count = businessOrderMapper.countByParams(params);
+        Pager pager = new Pager(page, pageSize, count);
+
+        params.put("start", (page-1) * pageSize);
+        params.put("end", page * pageSize);
+        List data = businessOrderMapper.listByParams(params);
+
+        pager.setRows(data);
+        return pager;
     }
 
     enum FileCate {

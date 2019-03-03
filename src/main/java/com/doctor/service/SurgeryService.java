@@ -1,5 +1,6 @@
 package com.doctor.service;
 
+import com.doctor.common.Pager;
 import com.doctor.mapper.SurgeryMapper;
 import com.doctor.mapper.SurgeryOrderMapper;
 import com.doctor.mapper.UserMapper;
@@ -69,5 +70,19 @@ public class SurgeryService {
 
     public List<Map<String, Object>> listAll() {
         return surgeryMapper.listAll();
+    }
+
+    public Object listOrders(int page, int pageSize) {
+        Map params = new HashMap();
+
+        int count = orderMapper.countByParams(params);
+        Pager pager = new Pager(page, pageSize, count);
+
+        params.put("start", (page-1) * pageSize);
+        params.put("end", page * pageSize);
+        List data = orderMapper.listByParams(params);
+
+        pager.setRows(data);
+        return pager;
     }
 }

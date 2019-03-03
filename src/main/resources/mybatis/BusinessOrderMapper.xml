@@ -31,6 +31,23 @@
     where o.user_id = #{userId}
   </select>
 
+
+  <select id="countByParams" resultType="Integer">
+    SELECT COUNT(*)
+    FROM tb_business_order
+  </select>
+  <select id="listByParams" resultType="Map">
+    select
+    o.id, o.product_id as productId, o.user_id as userId, u.name_, o.count, o.pay, o.status,
+    p.name as productName, p.summary, p.yprice, p.price, o.create_time, o.update_time
+    from tb_business_order o
+    left join tb_product p on o.product_id = p.id
+    LEFT JOIN sys_user u on o.user_id = u.id
+    <if test="start != null and end != null ">
+      LIMIT #{start}, #{end}
+    </if>
+  </select>
+
   <insert id="insert" parameterType="com.doctor.model.BusinessOrder" keyProperty="id" useGeneratedKeys="true">
     insert into tb_business_order (id, product_id, user_id, 
       count, pay)

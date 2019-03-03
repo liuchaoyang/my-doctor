@@ -19,4 +19,8 @@ public interface SurgeryOrderMapper {
     int updateByPrimaryKey(SurgeryOrder record);
 
     List<Map<String,Object>> listByUserId(String userId);
+
+    int countByParams(Map params);
+
+    List<Map<String,Object>> listByParams(Map params);
 }

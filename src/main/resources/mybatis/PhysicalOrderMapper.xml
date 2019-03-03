@@ -31,6 +31,21 @@
     LEFT JOIN tb_physical_therapy p ON o.physical_id = p.id
     WHERE o.user_id = #{userId}
   </select>
+
+  <select id="countByParams" resultType="Integer">
+    SELECT COUNT(*)
+    FROM tb_physical_order
+  </select>
+  <select id="listByParams" resultType="Map">
+    SELECT o.id, o.user_name, o.user_mobile, p.`name`, o.order_time as orderTime, o.`status`
+    FROM tb_physical_order o
+    LEFT JOIN tb_physical_therapy p ON o.physical_id = p.id
+    <if test="start != null and end != null ">
+      LIMIT #{start}, #{end}
+    </if>
+  </select>
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from tb_physical_order
     where id = #{id,jdbcType=INTEGER}

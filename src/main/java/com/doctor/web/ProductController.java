@@ -111,4 +111,12 @@ public class ProductController {
     public ResultJson orderConfirm(@RequestParam String userId) {
         return ResultJson.success(productService.listByUserId(userId));
     }
+
+
+    //admin
+    @RequestMapping("/admin/product/order/list")
+    public ResultJson listByUserId(@RequestParam(required = false, defaultValue = "1") int page,
+                                   @RequestParam(required = false, defaultValue = "10") int pageSize) {
+        return ResultJson.success(productService.list(page, pageSize));
+    }
 }

@@ -31,4 +31,9 @@ public class RecommendController {
         return ResultJson.success();
     }
 
+    @RequestMapping("/admin/recommend/list")
+    public ResultJson listByUserId(@RequestParam(required = false, defaultValue = "1") int page,
+                                   @RequestParam(required = false, defaultValue = "10") int pageSize) {
+        return ResultJson.success(recommendService.list(page, pageSize));
+    }
 }

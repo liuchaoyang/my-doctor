@@ -1,5 +1,6 @@
 package com.doctor.service;
 
+import com.doctor.common.Pager;
 import com.doctor.exception.APIBaseException;
 import com.doctor.exception.UserException;
 import com.doctor.mapper.RecommendNewerMapper;
@@ -10,6 +11,10 @@ import com.doctor.model.UserScore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class RecommendService {
@@ -37,5 +42,19 @@ public class RecommendService {
         score.setUserId(newer.getUserId());
         score.setRefUserId(String.valueOf(newer.getId()));
         userScoreMapper.insertSelective(score);
+    }
+
+    public Object list(int page, int pageSize) {
+        Map params = new HashMap();
+
+        int count = userScoreMapper.countByParams(params);
+        Pager pager = new Pager(page, pageSize, count);
+
+        params.put("start", (page-1) * pageSize);
+        params.put("end", page * pageSize);
+        List data = userScoreMapper.listByParams(params);
+
+        pager.setRows(data);
+        return pager;
     }
 }
