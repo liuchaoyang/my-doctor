@@ -181,12 +181,14 @@ public class ProductService {
         }
     }
 
-    public int order(int productId, String userId, int count, BigDecimal pay) {
+    public int order(int productId, String userId, int count, BigDecimal pay, String addrProvince, String addrDetail) {
         BusinessOrder order = new BusinessOrder();
         order.setProductId(productId);
         order.setUserId(userId);
         order.setCount(count);
         order.setPay(pay);
+        order.setAddrProvince(addrProvince);
+        order.setAddrDetail(addrDetail);
         businessOrderMapper.insert(order);
         logger.info("Product order insert:{}", order);
         return order.getId();

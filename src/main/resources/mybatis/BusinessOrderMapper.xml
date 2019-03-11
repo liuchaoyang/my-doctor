@@ -7,13 +7,15 @@
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
     <result column="count" property="count" jdbcType="INTEGER" />
     <result column="pay" property="pay" jdbcType="DECIMAL" />
+    <result column="addr_province" property="addrProvince" jdbcType="VARCHAR" />
+    <result column="addr_detail" property="addrDetail" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="INTEGER" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
 
   <sql id="Base_Column_List" >
-    o.id, o.product_id, o.user_id, o.count, o.pay, o.status
+    o.id, o.product_id, o.user_id, o.count, o.pay, o.status, addr_province, addr_detail
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -24,7 +26,7 @@
 
   <select id="listByUserId" resultType="Map">
     select
-    o.id, o.product_id as productId, o.user_id as userId, o.count, o.pay, o.status,
+    o.id, o.product_id as productId, o.user_id as userId, o.count, o.pay, o.status, o.addr_province as addrProvince, o.addr_detail as addrDetail,
     p.name as productName, p.summary, p.yprice, p.price, p.logo
     from tb_business_order o
     left join tb_product p on o.product_id = p.id
@@ -38,7 +40,7 @@
   </select>
   <select id="listByParams" resultType="Map">
     select
-    o.id, o.product_id as productId, o.user_id as userId, u.name_, o.count, o.pay, o.status,
+    o.id, o.product_id as productId, o.user_id as userId, u.name_, o.count, o.pay, o.status, o.addr_province as addrProvince, o.addr_detail as addrDetail,
     p.name as productName, p.summary, p.yprice, p.price, o.create_time, o.update_time
     from tb_business_order o
     left join tb_product p on o.product_id = p.id
@@ -49,9 +51,9 @@
   </select>
 
   <insert id="insert" parameterType="com.doctor.model.BusinessOrder" keyProperty="id" useGeneratedKeys="true">
-    insert into tb_business_order (id, product_id, user_id, 
+    insert into tb_business_order (id, product_id, user_id, addr_province, addr_detail
       count, pay)
-    values (#{id,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR} , #{addrProvince,jdbcType=VARCHAR}, #{addrDetail,jdbcType=VARCHAR},
       #{count,jdbcType=INTEGER}, #{pay,jdbcType=DECIMAL})
   </insert>
 

@@ -14,6 +14,9 @@ public class BusinessOrder {
 
     private BigDecimal pay;
 
+    private String addrProvince;
+    private String addrDetail;
+
     private Integer status;
     private Date updateTime;
 
@@ -25,6 +28,22 @@ public class BusinessOrder {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getAddrProvince() {
+        return addrProvince;
+    }
+
+    public void setAddrProvince(String addrProvince) {
+        this.addrProvince = addrProvince;
+    }
+
+    public String getAddrDetail() {
+        return addrDetail;
+    }
+
+    public void setAddrDetail(String addrDetail) {
+        this.addrDetail = addrDetail;
     }
 
     public Integer getProductId() {

@@ -97,8 +97,10 @@ public class ProductController {
     public ResultJson order(@PathVariable("productId") int productId,
                             @PathVariable("userId") String userId,
                             @RequestParam int count,
+                            @RequestParam String addrProvince,
+                            @RequestParam String addrDetail,
                             @RequestParam BigDecimal pay) {
-        return ResultJson.success(productService.order(productId, userId, count, pay));
+        return ResultJson.success(productService.order(productId, userId, count, pay, addrProvince, addrDetail));
     }
 
     @RequestMapping("/order/{orderId}/confirm")
