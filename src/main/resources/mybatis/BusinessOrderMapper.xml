@@ -7,6 +7,8 @@
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
     <result column="count" property="count" jdbcType="INTEGER" />
     <result column="pay" property="pay" jdbcType="DECIMAL" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="addr_province" property="addrProvince" jdbcType="VARCHAR" />
     <result column="addr_detail" property="addrDetail" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="INTEGER" />
@@ -15,7 +17,7 @@
   </resultMap>
 
   <sql id="Base_Column_List" >
-    o.id, o.product_id, o.user_id, o.count, o.pay, o.status, addr_province, addr_detail
+    o.id, o.product_id, o.user_id, o.count, o.pay, o.status, mobile, user_name, addr_province, addr_detail
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -51,9 +53,11 @@
   </select>
 
   <insert id="insert" parameterType="com.doctor.model.BusinessOrder" keyProperty="id" useGeneratedKeys="true">
-    insert into tb_business_order (id, product_id, user_id, addr_province, addr_detail
+    insert into tb_business_order (id, product_id, user_id,mobile, user_name, addr_province, addr_detail,
       count, pay)
-    values (#{id,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR} , #{addrProvince,jdbcType=VARCHAR}, #{addrDetail,jdbcType=VARCHAR},
+    values (#{id,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR} ,
+    #{mobile,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},
+    #{addrProvince,jdbcType=VARCHAR}, #{addrDetail,jdbcType=VARCHAR},
       #{count,jdbcType=INTEGER}, #{pay,jdbcType=DECIMAL})
   </insert>
 
