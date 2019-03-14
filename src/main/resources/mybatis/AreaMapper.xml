@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.doctor.mapper.AreaMapper" >
+  <resultMap id="resultMap" type="com.doctor.model.Area" >
+    <result column="area_id" property="areaId" jdbcType="INTEGER" />
+    <result column="area_name" property="name" jdbcType="VARCHAR" />
+    <result column="area_type" property="level" jdbcType="INTEGER" />
+    <result column="refe_id" property="refId" jdbcType="INTEGER" />
+  </resultMap>
+
+  <select id="findProvinces" resultMap="resultMap" >
+    SELECT *
+    FROM tb_area
+    WHERE area_type = 1
+    ORDER BY id
+  </select>
+
+  <select id="findAreasByRefId" resultMap="resultMap" >
+    SELECT *
+    FROM tb_area
+    WHERE refe_id = #{refId}
+  </select>
+
+  <select id="findAreasByIds" resultMap="resultMap" >
+    SELECT *
+    FROM tb_area
+    WHERE area_id IN
+    <foreach collection="list" item="item" open="(" close=")" separator=",">
+      #{item, jdbcType=INTEGER}
+    </foreach>
+  </select>
+</mapper>
