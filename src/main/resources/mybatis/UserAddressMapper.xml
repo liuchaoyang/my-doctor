@@ -7,12 +7,13 @@
     <result column="mobile" property="mobile" jdbcType="VARCHAR" />
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="area_id" property="areaId" jdbcType="VARCHAR" />
+    <result column="area_name" property="areaName" jdbcType="VARCHAR" />
     <result column="address" property="address" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, user_id, mobile, user_name, area_id, address, create_time, update_time
+    id, user_id, mobile, user_name, area_id, area_name, address, create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -31,10 +32,10 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.doctor.model.UserAddress" >
-    insert into tb_user_address (id, user_id, mobile, 
-      user_name, area_id, address)
+    insert into tb_user_address (id, user_id, mobile,
+      user_name, area_id, area_name, address)
     values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
-      #{userName,jdbcType=VARCHAR}, #{areaId,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR})
+      #{userName,jdbcType=VARCHAR}, #{areaId,jdbcType=VARCHAR}, #{areaName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.doctor.model.UserAddress" >
     insert into tb_user_address
@@ -105,6 +106,9 @@
       </if>
       <if test="areaId != null" >
         area_id = #{areaId,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        area_name = #{areaName,jdbcType=VARCHAR},
       </if>
       <if test="address != null" >
         address = #{address,jdbcType=VARCHAR},

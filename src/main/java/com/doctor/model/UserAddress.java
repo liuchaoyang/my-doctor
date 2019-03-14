@@ -12,12 +12,21 @@ public class UserAddress {
     private String userName;
 
     private String areaId;
+    private String areaName;
 
     private String address;
 
     private Date createTime;
 
     private Date updateTime;
+
+    public String getAreaName() {
+        return areaName;
+    }
+
+    public void setAreaName(String areaName) {
+        this.areaName = areaName;
+    }
 
     public Integer getId() {
         return id;
@@ -91,6 +100,7 @@ public class UserAddress {
                 ", mobile='" + mobile + '\'' +
                 ", userName='" + userName + '\'' +
                 ", areaId='" + areaId + '\'' +
+                ", areaName='" + areaName + '\'' +
                 ", address='" + address + '\'' +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
