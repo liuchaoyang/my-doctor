@@ -18,6 +18,8 @@ public class UserController {
     @Value("${dir.base}")
     private String FILE_DIR_BASE;
 
+    private static File DEFAULT_HEAD_IMG = null;
+
     @PostMapping("/user/head/upload")
     public ResultJson uploadHead(MultipartFile file, String userId) throws Exception {
         String filePath = FILE_DIR_BASE + "head/" +  userId + "/";
@@ -32,6 +34,13 @@ public class UserController {
         File file = new File(filePath);
         File[] files = file.listFiles();
         if (files == null || files.length < 1) {
+            //默认头像
+            if(DEFAULT_HEAD_IMG == null) {
+                String defaultPath = "static/img/kefayuan.jpeg";
+                DEFAULT_HEAD_IMG = new File(this.getClass().getClassLoader().getResource(defaultPath).getPath());
+            }
+
+            FileUtils.outputFile(response, DEFAULT_HEAD_IMG);
             return ResultJson.success(0);
         }
         FileUtils.outputFile(response, files[0]);

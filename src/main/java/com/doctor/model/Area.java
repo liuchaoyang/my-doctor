@@ -1,10 +1,13 @@
 package com.doctor.model;
 
+import java.util.List;
+
 public class Area {
     private Integer areaId;
     private String name;
     private Integer level;
     private Integer refId;
+    private List<Area> sons;
 
     public Integer getAreaId() {
         return areaId;
@@ -36,5 +39,13 @@ public class Area {
 
     public void setRefId(Integer refId) {
         this.refId = refId;
+    }
+
+    public List<Area> getSons() {
+        return sons;
+    }
+
+    public void setSons(List<Area> sons) {
+        this.sons = sons;
     }
 }
