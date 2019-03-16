@@ -29,7 +29,7 @@
   <select id="listAll" resultMap="BaseResultMap">
     SELECT id, name, summary, yprice, price, banner, detail, sort, update_time, create_time
     FROM tb_product
-    ORDER BY update_time DESC, sort DESC
+    ORDER BY sort DESC,update_time DESC
   </select>
 
   <select id="findLogo" resultType="Byte">
