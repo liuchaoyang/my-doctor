@@ -34,6 +34,7 @@ public class ProductController {
                                  String summary,
                                  BigDecimal yprice,
                                  BigDecimal price,
+                                 @RequestParam(required = false, defaultValue = "0") Integer sort,
                                  @RequestParam(required = false) MultipartFile logo,
                                  @RequestParam(required = false) MultipartFile banner,
                                  @RequestParam(value = "details", required = false) MultipartFile[] details) throws Exception {
@@ -52,6 +53,7 @@ public class ProductController {
                 .summary(summary)
                 .yprice(yprice)
                 .price(price)
+                .sort(sort)
 //                .logo(logo != null? logo.getOriginalFilename() : null)
                 .banner(banner != null? banner.getOriginalFilename() : null)
                 .detail(detailArr)

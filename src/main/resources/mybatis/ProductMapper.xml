@@ -10,12 +10,13 @@
     <result column="logo" property="logo" jdbcType="LONGVARBINARY" />
     <result column="banner" property="banner" jdbcType="VARCHAR" />
     <result column="detail" property="detail" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
 
   <sql id="Base_Column_List" >
-    id, name, summary, yprice, price, logo, banner, detail, update_time, create_time
+    id, name, summary, yprice, price, logo, banner, detail, sort, update_time, create_time
   </sql>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -26,9 +27,9 @@
   </select>
 
   <select id="listAll" resultMap="BaseResultMap">
-    SELECT id, name, summary, yprice, price, banner, detail, update_time, create_time
+    SELECT id, name, summary, yprice, price, banner, detail, sort, update_time, create_time
     FROM tb_product
-    ORDER BY update_time DESC
+    ORDER BY update_time DESC, sort DESC
   </select>
 
   <select id="findLogo" resultType="Byte">
@@ -39,11 +40,11 @@
 
   <insert id="insert" parameterType="com.doctor.model.Product" keyProperty="id" useGeneratedKeys="true">
     insert into tb_product (id, name, summary, 
-      yprice, price, logo, banner, detail
+      yprice, price, logo, banner, detail, sort
       )
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, 
       #{yprice,jdbcType=DECIMAL}, #{price,jdbcType=DECIMAL}, #{logo,jdbcType=LONGVARBINARY}, #{banner,jdbcType=VARCHAR},
-      #{detail,jdbcType=VARCHAR}
+      #{detail,jdbcType=VARCHAR}, #{sort}
       )
   </insert>
 
@@ -70,6 +71,9 @@
       </if>
       <if test="detail != null" >
         detail = #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort},
       </if>
       <if test="updateTime != null" >
         update_time = #{updateTime,jdbcType=TIMESTAMP},

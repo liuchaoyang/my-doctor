@@ -27,6 +27,8 @@ public class Product {
 
     private String detail;
 
+    private int sort;
+
     private Date updateTime;
 
     private Date createTime;
