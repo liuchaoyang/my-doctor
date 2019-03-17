@@ -125,4 +125,11 @@ public class ProductController {
                                    @RequestParam(required = false, defaultValue = "10") int pageSize) {
         return ResultJson.success(productService.list(page, pageSize));
     }
+
+
+    @RequestMapping("/admin/product/order/over")
+    public ResultJson over(@RequestParam Integer over, @RequestParam Integer orderId) {
+        productService.over(orderId, over);
+        return ResultJson.success();
+    }
 }

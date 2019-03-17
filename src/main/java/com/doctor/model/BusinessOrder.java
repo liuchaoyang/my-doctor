@@ -20,9 +20,18 @@ public class BusinessOrder {
     private String addrDetail;
 
     private Integer status;
+    private Integer over;
     private Date updateTime;
 
     private Date createTime;
+
+    public Integer getOver() {
+        return over;
+    }
+
+    public void setOver(Integer over) {
+        this.over = over;
+    }
 
     public Integer getId() {
         return id;

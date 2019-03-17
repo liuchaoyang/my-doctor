@@ -245,11 +245,18 @@ public class ProductService {
         Pager pager = new Pager(page, pageSize, count);
 
         params.put("start", (page-1) * pageSize);
-        params.put("end", page * pageSize);
+        params.put("end", pageSize);
         List data = businessOrderMapper.listByParams(params);
 
         pager.setRows(data);
         return pager;
+    }
+
+    public void over(Integer orderId, Integer over) {
+        BusinessOrder order = businessOrderMapper.selectByPrimaryKey(orderId);
+        order.setOver(over);
+        businessOrderMapper.updateByPrimaryKeySelective(order);
+        logger.info("Product order over:{}", order);
     }
 
     enum FileCate {
