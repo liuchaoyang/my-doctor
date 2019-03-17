@@ -5,9 +5,9 @@ spring:
   profiles:
     active: dev
   datasource:
-    url: jdbc:mysql://localhost:3306/yhhbsz?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+    url: jdbc:mysql://39.106.31.166:3306/yhhbsz?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
     username: root
-    password:
+    password: liuchaoyang
   redis:
     host: localhost
     port: 6379
