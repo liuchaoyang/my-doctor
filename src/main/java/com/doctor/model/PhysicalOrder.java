@@ -24,9 +24,19 @@ public class PhysicalOrder {
 
     private Integer status;
 
+    private Integer over;
+
     private Date createTime;
 
     private Date updateTime;
+
+    public Integer getOver() {
+        return over;
+    }
+
+    public void setOver(Integer over) {
+        this.over = over;
+    }
 
     public Integer getId() {
         return id;

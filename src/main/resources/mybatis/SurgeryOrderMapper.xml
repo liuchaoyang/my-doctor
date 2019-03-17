@@ -11,11 +11,12 @@
     <result column="doctor_id" property="doctorId" jdbcType="VARCHAR" />
     <result column="surgery_id" property="surgeryId" jdbcType="INTEGER" />
     <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="over" property="over" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, user_id, user_name, user_mobile, order_time, org_id, doctor_id, surgery_id, status, 
+    id, user_id, user_name, user_mobile, order_time, org_id, doctor_id, surgery_id, status, over,
     create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -37,9 +38,10 @@
     FROM tb_surgery_order
   </select>
   <select id="listByParams" resultType="Map">
-    SELECT o.id, o.user_name, o.user_mobile, p.`name`, o.order_time as orderTime, o.`status`
+    SELECT o.id, o.user_name, o.user_mobile, p.`name`, o.order_time as orderTime, o.`status`, o.over
     FROM tb_surgery_order o
     LEFT JOIN tb_surgery p ON o.surgery_id = p.id
+    ORDER BY o.over ASC, o.update_time DESC
     <if test="start != null and end != null ">
       LIMIT #{start}, #{end}
     </if>
@@ -158,6 +160,9 @@
       </if>
       <if test="status != null" >
         status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="over != null" >
+        over = #{over,jdbcType=TINYINT},
       </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},

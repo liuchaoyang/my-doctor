@@ -63,4 +63,11 @@ public class SurgeryController {
                                    @RequestParam(required = false, defaultValue = "10") int pageSize) {
         return ResultJson.success(surgeryService.listOrders(page, pageSize));
     }
+
+
+    @RequestMapping("/admin/surgery/order/over")
+    public ResultJson over(@RequestParam Integer over, @RequestParam Integer orderId) {
+        surgeryService.over(orderId, over);
+        return ResultJson.success();
+    }
 }

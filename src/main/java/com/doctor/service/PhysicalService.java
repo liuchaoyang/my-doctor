@@ -8,6 +8,8 @@ import com.doctor.model.PhysicalOrder;
 import com.doctor.model.PhysicalTherapy;
 import com.doctor.model.User;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +20,7 @@ import java.util.Map;
 
 @Service
 public class PhysicalService {
-
+    private static final Logger logger = LoggerFactory.getLogger(PhysicalService.class);
 
     @Autowired
     private PhysicalTherapyMapper physicalTherapyMapper;
@@ -79,10 +81,17 @@ public class PhysicalService {
         Pager pager = new Pager(page, pageSize, count);
 
         params.put("start", (page-1) * pageSize);
-        params.put("end", page * pageSize);
+        params.put("end", pageSize);
         List data = orderMapper.listByParams(params);
 
         pager.setRows(data);
         return pager;
+    }
+
+    public void over(Integer orderId, Integer over) {
+        PhysicalOrder order = orderMapper.selectByPrimaryKey(orderId);
+        order.setOver(over);
+        orderMapper.updateByPrimaryKeySelective(order);
+        logger.info("PhysicalOrder order over:{}", order);
     }
 }

@@ -63,4 +63,10 @@ public class PhysicalController {
         return ResultJson.success(physicalService.listOrders(page, pageSize));
     }
 
+
+    @RequestMapping("/admin/physical/order/over")
+    public ResultJson over(@RequestParam Integer over, @RequestParam Integer orderId) {
+        physicalService.over(orderId, over);
+        return ResultJson.success();
+    }
 }

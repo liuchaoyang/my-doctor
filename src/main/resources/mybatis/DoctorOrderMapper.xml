@@ -12,11 +12,12 @@
     <result column="make_date" property="makeDate" jdbcType="DATE" />
     <result column="make_type" property="makeType" jdbcType="TINYINT" />
     <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="over" property="over" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, doctor_id, user_id, user_name, user_mobile, description, upload_files, make_date,
-    make_type, status, create_time
+    make_type, status, over, create_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -80,6 +81,7 @@
       o.pay as pay,
       o.code as code,
       o.status as status,
+      o.over,
 
       u.name_ as doctorName,
       d.profession_title as professionTitle,
@@ -93,6 +95,7 @@
     LEFT JOIN sys_doctor d on d.user_id = u.id
 	LEFT JOIN sys_org g on g.id = u.org_id
       <include refid="paramsWhere"/>
+      ORDER BY o.over ASC, o.create_time DESC
       <if test="start != null and end != null ">
         LIMIT #{start}, #{end}
       </if>
@@ -209,6 +212,9 @@
       </if>
       <if test="status != null" >
         status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="over != null" >
+        over = #{over,jdbcType=TINYINT},
       </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},

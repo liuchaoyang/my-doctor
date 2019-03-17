@@ -52,4 +52,11 @@ public class DoctorOrderController {
                                    @RequestParam(required = false, defaultValue = "10") int pageSize) {
         return ResultJson.success(orderService.listAll(page, pageSize));
     }
+
+
+    @RequestMapping("/admin/doctor_order/over")
+    public ResultJson over(@RequestParam Integer over, @RequestParam Integer orderId) {
+        orderService.over(orderId, over);
+        return ResultJson.success();
+    }
 }
